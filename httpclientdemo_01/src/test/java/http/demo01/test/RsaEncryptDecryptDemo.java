@@ -10,20 +10,20 @@ import java.util.Base64;
 
 public class RsaEncryptDecryptDemo {
     public static String encrypt(String plainText , PublicKey publicKey) throws Exception{
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(RSAKeyGenerator.ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE,publicKey);
         byte[] bytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(bytes);
     }
     public static String decrypt(String encodeText , PrivateKey privateKey) throws Exception{
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(RSAKeyGenerator.ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] bytes = cipher.doFinal(Base64.getDecoder().decode(encodeText.getBytes(StandardCharsets.UTF_8)));
         return new String(bytes);
     }
 }
 class RSAKeyGenerator{
-    private static final String ALGORITHM = "RSA";
+    public static final String ALGORITHM = "RSA";
     public static KeyPair generatorKeyPair() throws  Exception{
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ALGORITHM);
         keyPairGenerator.initialize(2048);
