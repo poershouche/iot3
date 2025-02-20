@@ -14,7 +14,7 @@ import java.util.Base64;
 /**
  * 统一门户 加解密 ECB /CBC
  */
-public class EncryptDecrptDemo {
+public class AesEncryptDecrptDemo {
 
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding"; // CBC模式
