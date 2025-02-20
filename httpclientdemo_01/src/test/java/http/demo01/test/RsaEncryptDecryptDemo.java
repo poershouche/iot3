@@ -3,7 +3,6 @@ package http.demo01.test;
 import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
@@ -20,14 +19,6 @@ public class RsaEncryptDecryptDemo {
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] bytes = cipher.doFinal(Base64.getDecoder().decode(encodeText.getBytes(StandardCharsets.UTF_8)));
         return new String(bytes);
-    }
-}
-class RSAKeyGenerator{
-    public static final String ALGORITHM = "RSA";
-    public static KeyPair generatorKeyPair() throws  Exception{
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ALGORITHM);
-        keyPairGenerator.initialize(2048);
-        return keyPairGenerator.generateKeyPair();
     }
 }
 
