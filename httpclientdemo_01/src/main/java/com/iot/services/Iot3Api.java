@@ -10,10 +10,9 @@ import java.util.logging.Logger;
 
 public class Iot3Api {
 
-    private static final Map<String, String> token;
     private static final Logger logger = Logger.getLogger(Iot3Api.class.getName());
     private static final String host_url;
-
+    private static final Map<String,String> HEADERS=new HashMap<>();
     static {
 
         host_url = Config.getBaseUrl();
@@ -33,10 +32,11 @@ public class Iot3Api {
 
 
         Map<String, String> get_token = ApiClient.getToken(url, jsonObject.toString(), headersMap);
-        token = get_token;
 
-
-//        System.out.println(token.get("x-access-token"));
+        //请求头
+        HEADERS.put("Content-Type", "application/json");
+        HEADERS.put("x-access-token", get_token.get("x-access-token"));
+//        System.out.println(get_token.get("x-access-token"));
     }
 
     /**
@@ -58,10 +58,8 @@ public class Iot3Api {
         params.add(jsonBody);
         String s = params.toString();
         String url = host_url + "/dashboard/_multi";
-        Map<String, String> headers = new HashMap<>(); //请求头
-        headers.put("Content-Type", "application/json");
-        headers.put("x-access-token", token.get("x-access-token"));
-        JSONObject jsonObject = ApiClient.doPostJson(url, s, headers);
+
+        JSONObject jsonObject = ApiClient.doPostJson(url, s, HEADERS);
         logger.info(jsonObject.getString("status"));
         System.out.println(jsonObject);
     }
@@ -76,13 +74,9 @@ public class Iot3Api {
         jsonBody.put("alarmConfigId", "1864860078520524800");
         jsonBody.put("describe", "zdr execute");
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        headers.put("x-access-token", token.get("x-access-token"));
-
         String url = host_url + "/api/v1/manualAlertClear";
 
-        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), headers);
+        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), HEADERS);
         logger.info(jsonObject.getString("status"));
         logger.info(jsonObject.toString());
 
@@ -99,13 +93,9 @@ public class Iot3Api {
         jsonBody.put("pageSize", 10);
         jsonBody.put("orgId", "012");
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        headers.put("x-access-token", token.get("x-access-token"));
-
         String url = host_url + "/api/v1/shadow/query";
 
-        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), headers);
+        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), HEADERS);
         logger.info(jsonObject.getString("status"));
         System.out.println(jsonObject.toJSONString());
 
@@ -129,14 +119,9 @@ public class Iot3Api {
 
 
         jsonBody.put("special_class", "0");
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        headers.put("x-access-token", token.get("x-access-token"));
-
         String url = host_url + "/ResourceServer/api/v1/getdevicecount";
 
-        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), headers);
+        JSONObject jsonObject = ApiClient.doPostJson(url, jsonBody.toString(), HEADERS);
         logger.info(jsonObject.getString("result"));
         if (JSONArray.parseArray(jsonObject.getString("devlist")).size() < 1) {
             logger.info("项目id:>>>" + valueOf);

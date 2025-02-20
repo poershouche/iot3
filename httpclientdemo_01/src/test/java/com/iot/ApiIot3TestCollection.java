@@ -6,6 +6,7 @@ import com.iot.services.Iot3Api;
 import org.apache.http.Header;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -30,8 +31,8 @@ public class ApiIot3TestCollection {
     @Test
     public void test(){
 
-        Iot3Api.testMutipDevices();
-//        Iot3Api.testAlterClear();
+//        Iot3Api.testMutipDevices();
+        Iot3Api.testAlterClear();
 //        Iot3Api.testShadowQuery();
 //        Iot3Api.testDevCount();
 
@@ -59,9 +60,12 @@ public class ApiIot3TestCollection {
          String stringEntity =  EntityUtils.toString(urlEncodedFormEntity);
 
          StringBuffer stringBuffer = new StringBuffer();
-         stringBuffer.append("?").append(stringEntity);
+         stringBuffer.append("http://www.baidu.com")
+                 .append("?")
+                 .append(stringEntity);
 
          CloseableHttpClient build1 = (CloseableHttpClient) httpClient.build().execute(httpGet);
+         System.out.println(build1);
 
      }
 

@@ -35,7 +35,6 @@ public class ApiClient {
      * @return
      */
     public static @NotNull Map<String,String> getToken(String url, String params, Map<String,String> headParams){
-
         JSONObject token = doPost(url, params, headParams);
         Map<String, String> header = new HashMap<>();
         header.put("x-access-token",token.getString("access_token"));
@@ -65,9 +64,9 @@ public class ApiClient {
             paramStr = EntityUtils.toString(new UrlEncodedFormEntity(paramsList));
             //拼接参数
             StringBuffer sb = new StringBuffer();
-            sb.append(url);
-            sb.append("?");
-            sb.append(paramStr);
+            sb.append(url)
+                    .append("?")
+                    .append(paramStr);
 
             HttpGet httpGet = new HttpGet(sb.toString());
             RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000)

@@ -1,6 +1,7 @@
 package http.demo01.test;
 
 import javax.crypto.Cipher;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -35,5 +36,14 @@ class TEST{
         Thread.sleep(1000);
         String decrypt = RsaEncryptDecryptDemo.decrypt(encrypt, aPrivate);
         System.out.println(decrypt);
+
+      /*  Class<RsaEncryptDecryptDemo> aClass = RsaEncryptDecryptDemo.class;
+        KeyPair keyPair = RSAKeyGenerator.generatorKeyPair();
+        PublicKey aPublic = keyPair.getPublic();
+        Object rsa = aClass.getDeclaredConstructor().newInstance();
+        Method encrypt = aClass.getDeclaredMethod("encrypt", String.class, PublicKey.class);
+        System.out.println(encrypt.invoke(rsa, "wangwu", aPublic));*/
+
+
     }
 }
