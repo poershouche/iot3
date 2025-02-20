@@ -1,0 +1,25 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+
+### 查询所有视频网关子设备
+POST https://unilink.crland.com.cn/business/media/video/page
+Accept: application/json
+Content-Type: application/json
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3Mzk1MDUyNzksInVzZXJJZCI6IjU2NWUyN2IxLTlhODAtNDliNC04MjBmLTkxOGE4NTEyMTU1NDE4ZDYzZDIwLTg3ODctNDljYi04MTdmLWIzYTQ2MDg1NWY3YyJ9.Ua1TY10R718GnhXK9qSEjfNP66ZeXUXWPdivLadmpAs
+
+{
+    "data": {
+        "projectId": "0cad6ab6-3dc8-4655-9a79-fd3b8eebbdca",
+        "deviceType": "1",
+        "gatewayInfoId": "01562da8e73850ab6ce9b8a9b67112c6"
+    },
+    "page": {
+        "pageNum": 1,
+        "pageSize": 300
+    },
+    "projectId": "0cad6ab6-3dc8-4655-9a79-fd3b8eebbdca",
+    "projectNo": "114",
+    "operation_person": "fb-50"
+}
